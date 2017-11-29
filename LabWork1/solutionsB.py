@@ -310,65 +310,65 @@ def main():
     # start timer
     time.clock()
 
-    # for item in ["Brown", "af-ud", "de-ud", "zh-ud"]:
-    #
-    #     print "in process " + item
-    #     # open Brown training data
-    #     infile = open(DATA_PATH + item + "-train_tagged.txt", "r")
-    #     brown_train = infile.readlines()
-    #     infile.close()
-    #
-    #     # split words and tags, and add start and stop symbols (question 1)
-    #     brown_words, brown_tags = split_wordtags(brown_train, True)
-    #
-    #     # calculate tag trigram probabilities (question 2)
-    #     q_values = calc_trigrams(brown_tags)
-    #
-    #     # question 2 output
-    #     q2_output(q_values, OUTPUT_PATH + item + '_B2.txt')
-    #
-    #     # calculate list of words with count > 5 (question 3)
-    #     known_words = calc_known(brown_words)
-    #
-    #     # get a version of brown_words with rare words replace with '_RARE_' (question 3)
-    #     brown_words_rare = replace_rare(brown_words, known_words)
-    #
-    #     # question 3 output
-    #     q3_output(brown_words_rare, OUTPUT_PATH + item + "_B3.txt")
-    #
-    #     # calculate emission probabilities (question 4)
-    #     e_values, taglist = calc_emission(brown_words_rare, brown_tags)
-    #
-    #     # question 4 output
-    #     q4_output(e_values, OUTPUT_PATH + item + "_B4.txt")
-    #
-    #     # delete unneceessary data
-    #     del brown_train
-    #     del brown_words_rare
-    #
-    #     # open Brown development data (question 5)
-    #     infile = open(DATA_PATH + item + "-test.txt", "r")
-    #     brown_dev = infile.readlines()
-    #     infile.close()
-    #
-    #     # format Brown development data here
-    #     brown_dev_words = []
-    #     for sentence in brown_dev:
-    #         brown_dev_words.append(sentence.split(" ")[:-1])
-    #
-    #     # do viterbi on brown_dev_words (question 5)
-    #     viterbi_tagged = viterbi(brown_dev_words, taglist, known_words, q_values, e_values)
-    #
-    #     # question 5 output
-    #     q5_output(viterbi_tagged, OUTPUT_PATH + item + "_B5.txt")
-    #
-    #     # do nltk tagging here
-    #     nltk_tagged = nltk_tagger(brown_words, brown_tags, brown_dev_words)
-    #
-    #     # question 6 output
-    #     q6_output(nltk_tagged, OUTPUT_PATH + item + "_B6.txt")
+    for item in ["Brown", "af-ud", "de-ud", "zh-ud"]:
 
-    for item in ["af-ud", "de-ud", "zh-ud"]: #"Brown",
+        print "in process " + item
+        # open Brown training data
+        infile = open(DATA_PATH + item + "-train_tagged.txt", "r")
+        brown_train = infile.readlines()
+        infile.close()
+
+        # split words and tags, and add start and stop symbols (question 1)
+        brown_words, brown_tags = split_wordtags(brown_train, True)
+
+        # calculate tag trigram probabilities (question 2)
+        q_values = calc_trigrams(brown_tags)
+
+        # question 2 output
+        q2_output(q_values, OUTPUT_PATH + item + '_B2.txt')
+
+        # calculate list of words with count > 5 (question 3)
+        known_words = calc_known(brown_words)
+
+        # get a version of brown_words with rare words replace with '_RARE_' (question 3)
+        brown_words_rare = replace_rare(brown_words, known_words)
+
+        # question 3 output
+        q3_output(brown_words_rare, OUTPUT_PATH + item + "_B3.txt")
+
+        # calculate emission probabilities (question 4)
+        e_values, taglist = calc_emission(brown_words_rare, brown_tags)
+
+        # question 4 output
+        q4_output(e_values, OUTPUT_PATH + item + "_B4.txt")
+
+        # delete unneceessary data
+        del brown_train
+        del brown_words_rare
+
+        # open Brown development data (question 5)
+        infile = open(DATA_PATH + item + "-test.txt", "r")
+        brown_dev = infile.readlines()
+        infile.close()
+
+        # format Brown development data here
+        brown_dev_words = []
+        for sentence in brown_dev:
+            brown_dev_words.append(sentence.split(" ")[:-1])
+
+        # do viterbi on brown_dev_words (question 5)
+        viterbi_tagged = viterbi(brown_dev_words, taglist, known_words, q_values, e_values)
+
+        # question 5 output
+        q5_output(viterbi_tagged, OUTPUT_PATH + item + "_B5.txt")
+
+        # do nltk tagging here
+        nltk_tagged = nltk_tagger(brown_words, brown_tags, brown_dev_words)
+
+        # question 6 output
+        q6_output(nltk_tagged, OUTPUT_PATH + item + "_B6.txt")
+
+    for item in ["Brown", "af-ud", "de-ud", "zh-ud"]:
         print "in crf process " + item
         # open Brown training data
         infile = open(DATA_PATH + item + "-train_tagged.txt", "rb")
